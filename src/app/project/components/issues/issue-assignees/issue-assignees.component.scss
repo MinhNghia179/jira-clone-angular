@@ -13,5 +13,9 @@
 
   &:hover {
     text-decoration: underline;
-  }  
+  }
+}
+
+.divider {
+  @apply mt-1 pt-1 border-t-2 border-borderLightest;
 }

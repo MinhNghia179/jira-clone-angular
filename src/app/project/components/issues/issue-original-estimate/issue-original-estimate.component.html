@@ -1,0 +1,37 @@
+<div class="mt-6 mb-1 uppercase text-textMedium text-13 font-bold">Original Estimate</div>
+<textarea
+    cdkTextareaAutosize
+    [placeholder]="'None'"
+    class="textarea-inline-control w-full"
+    [formControl]="timeControl"
+    [rows]="1"
+    (click)="setTimeEdit(true)"
+></textarea>
+
+<div
+    *ngIf="isEditing"
+    class="flex justify-end"
+>
+    <j-button
+        class="flex items-center box-shadow"
+        (click)="formatEstimateTime()"
+        [className]="'btn-empty'"
+    >
+        <i
+            nz-icon
+            nzType="check"
+            nzTheme="outline"
+        ></i>
+    </j-button>
+    <j-button
+        class="ml-1 flex items-center box-shadow"
+        (click)="cancelEditTime()"
+        [className]="'btn-empty'"
+    >
+        <i
+            nz-icon
+            nzType="close"
+            nzTheme="outline"
+        ></i>
+    </j-button>
+</div>

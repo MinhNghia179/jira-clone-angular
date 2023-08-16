@@ -1,42 +1,94 @@
-<div class="flex items-center mt-6">
-    <form class="w-40 mr-4">
-        <j-input aria-label="search"
-                 icon="search"                 
-                 [control]="searchControl">
-        </j-input>
-    </form>
-    <div class="flex flex-row mr-3">
-        <div *ngFor="let user of projectQuery.users$ | async"
-             class="lift-avatar"
-             nz-tooltip
-             [nzTooltipPlacement]="'bottom'"
-             [class.is-active]="isUserSelected(user)"
-             [nzTooltipTitle]="user.name">
-            <j-avatar class="flex"
-                      className="select-none shadow-outline-white"
-                      [avatarUrl]="user.avatarUrl"
-                      [size]="36"
-                      (click)="userChanged(user)">
-            </j-avatar>
+<div class="flex-column mt-6">
+    <div class="flex items-center mb-2">
+        <form class="w-40 mr-4">
+            <j-input
+                aria-label="search"
+                icon="search"
+                placeholder="Search"
+                [control]="searchControl"
+                [enableClearButton]="true"
+            >
+            </j-input>
+        </form>
+        <div class="flex flex-row mr-3">
+            <div
+                *ngFor="let user of projectQuery.users$ | async"
+                class="lift-avatar"
+                nz-tooltip
+                [nzTooltipPlacement]="'bottom'"
+                [class.is-active]="isUserSelected(user)"
+                [nzTooltipTitle]="user.name"
+            >
+                <j-avatar
+                    class="flex"
+                    className="select-none shadow-outline-white"
+                    [avatarUrl]="user.avatarUrl"
+                    [size]="36"
+                    (click)="userChanged(user)"
+                >
+                </j-avatar>
+            </div>
+        </div>
+        <j-button
+            class="ml-3"
+            [isActive]="isQuickFilter"
+            rightIcon="caret-down"
+            className="btn-secondary"
+            (click)="toggleQuickFilterChanged()"
+        >
+            Quick filters {{ numberSelected || "" }}
+        </j-button>
+        <div
+            class="flex items-center ml-3"
+            *ngIf="filterQuery.any$ | async"
+        >
+            <div class="mr-3 w-px bg-backgroundMedium self-stretch"></div>
+            <j-button
+                [className]="'btn-secondary'"
+                (click)="resetAll()"
+            >
+                Clear all
+            </j-button>
         </div>
     </div>
-    <j-button class="ml-3"
-              className="btn-empty"
-              [isActive]="filterQuery.onlyMyIssue$ | async"
-              (click)="onlyMyIssueChanged()">
-        Only My Issues
-    </j-button>
-    <j-button class="ml-3"
-              [isActive]="filterQuery.ignoreResolve$ | async"
-              (click)="ignoreResolvedChanged()"
-              className="btn-empty">
-        Ignore Resolved
-    </j-button>
-    <div class="ml-3 flex items-center"
-         *ngIf="filterQuery.any$ | async">
-        <div class="mr-3 w-px bg-backgroundMedium self-stretch"></div>
-        <j-button [className]="'btn-secondary'"
-                  (click)="resetAll()">Clear all
+    <div
+        *ngIf="isQuickFilter"
+        class="flex items-center"
+    >
+        <j-button
+            className="btn-secondary with-margin"
+            [isActive]="filterQuery.backLogOnly$ | async"
+            (click)="backLogOnlyChanged()"
+        >
+            Backlog only
+        </j-button>
+        <j-button
+            className="btn-secondary with-margin"
+            [isActive]="filterQuery.onlyMyIssue$ | async"
+            (click)="onlyMyIssueChanged()"
+        >
+            Only My Issues
+        </j-button>
+        <j-button
+            className="btn-secondary with-margin"
+            [isActive]="filterQuery.priority$ | async"
+            (click)="priorityChanged()"
+        >
+            Priority
+        </j-button>
+        <j-button
+            className="btn-secondary with-margin"
+            [isActive]="filterQuery.notPriority$ | async"
+            (click)="notPriorityChanged()"
+        >
+            Not Priority
+        </j-button>
+        <j-button
+            [isActive]="filterQuery.ignoreResolve$ | async"
+            (click)="ignoreResolvedChanged()"
+            className="btn-secondary with-margin"
+        >
+            Ignore Resolved
         </j-button>
     </div>
 </div>

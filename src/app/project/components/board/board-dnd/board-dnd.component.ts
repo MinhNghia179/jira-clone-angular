@@ -14,7 +14,8 @@ export class BoardDndComponent {
     IssueStatus.BACKLOG,
     IssueStatus.SELECTED,
     IssueStatus.IN_PROGRESS,
-    IssueStatus.DONE
+    IssueStatus.DONE,
+    IssueStatus.CLOSE
   ];
 
   constructor(public projectQuery: ProjectQuery, public authQuery: AuthQuery) {}

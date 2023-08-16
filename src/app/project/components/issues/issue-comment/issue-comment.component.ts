@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  HostListener,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JComment } from '@trungk18/interface/comment';
@@ -20,7 +27,6 @@ export class IssueCommentComponent implements OnInit {
   commentControl: FormControl;
   user: JUser;
   isEditing: boolean;
-
   constructor(
     private _authQuery: AuthQuery,
     private projectService: ProjectService

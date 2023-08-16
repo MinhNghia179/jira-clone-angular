@@ -1,4 +1,10 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JIssue } from '@trungk18/interface/issue';
 import { IssuePriorityIcon } from '@trungk18/interface/issue-priority-icon';
@@ -20,11 +26,16 @@ export class IssueCardComponent implements OnChanges, OnInit {
   issueTypeIcon: string;
   priorityIcon: IssuePriorityIcon;
 
-  constructor(private _projectQuery: ProjectQuery, private _modalService: NzModalService) {}
+  constructor(
+    private _projectQuery: ProjectQuery,
+    private _modalService: NzModalService
+  ) {}
 
   ngOnInit(): void {
     this._projectQuery.users$.pipe(untilDestroyed(this)).subscribe((users) => {
-      this.assignees = this.issue.userIds.map((userId) => users.find((x) => x.id === userId));
+      this.assignees = this.issue.userIds.map((userId) =>
+        users.find((x) => x.id === userId)
+      );
     });
   }
 

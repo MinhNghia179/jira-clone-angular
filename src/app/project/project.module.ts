@@ -13,6 +13,7 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { QuillModule } from 'ngx-quill';
 import { JiraControlModule } from '../jira-control/jira-control.module';
 import { AddIssueModalComponent } from './components/add-issue-modal/add-issue-modal.component';
@@ -33,6 +34,7 @@ import { FullIssueDetailComponent } from './pages/full-issue-detail/full-issue-d
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
+import { IssueOriginalEstimateComponent } from './components/issues/issue-original-estimate/issue-original-estimate.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { ProjectComponent } from './project.component';
     IssuePrioritySelectComponent,
     IssueReporterSelectComponent,
     IssueAssigneesSelectComponent,
-    ResizerComponent
+    ResizerComponent,
+    IssueOriginalEstimateComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +68,7 @@ import { ProjectComponent } from './project.component';
     NzNotificationModule,
     NzDrawerModule,
     NzPopoverModule,
+    NzAvatarModule,
     DragDropModule,
     TextFieldModule,
     FormsModule,

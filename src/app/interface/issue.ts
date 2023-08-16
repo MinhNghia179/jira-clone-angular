@@ -1,4 +1,3 @@
-
 import { JComment } from './comment';
 
 /* eslint-disable no-shadow */
@@ -13,14 +12,16 @@ export enum IssueStatus {
   SELECTED = 'Selected',
   // eslint-disable-next-line @typescript-eslint/naming-convention
   IN_PROGRESS = 'InProgress',
-  DONE = 'Done'
+  DONE = 'Done',
+  CLOSE = 'Close'
 }
 
 export const IssueStatusDisplay = {
   [IssueStatus.BACKLOG]: 'Backlog',
   [IssueStatus.SELECTED]: 'Selected for Development',
   [IssueStatus.IN_PROGRESS]: 'In progress',
-  [IssueStatus.DONE]: 'Done'
+  [IssueStatus.DONE]: 'Done',
+  [IssueStatus.CLOSE]: 'Close'
 };
 
 export enum IssuePriority {
@@ -55,5 +56,7 @@ export interface JIssue {
   userIds: string[];
   comments: JComment[];
   projectId: string;
+  originalEstimate: number;
+  label: string;
 }
 /* eslint-enable no-shadow */

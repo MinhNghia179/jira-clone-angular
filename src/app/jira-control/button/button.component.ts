@@ -13,7 +13,7 @@ export class ButtonComponent {
   @Input() isWorking: boolean;
   @Input() isActive: boolean;
   @Input() disabled: boolean;
+  @Input() rightIcon: string;
 
   constructor() {}
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FilterQuery } from '@trungk18/project/state/filter/filter.query';
@@ -6,6 +6,7 @@ import { FilterService } from '@trungk18/project/state/filter/filter.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { JUser } from '@trungk18/interface/user';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'board-filter',
@@ -16,6 +17,8 @@ import { JUser } from '@trungk18/interface/user';
 export class BoardFilterComponent implements OnInit {
   searchControl: FormControl = new FormControl('');
   userIds: string[];
+  numberSelected: number;
+  isQuickFilter: boolean;
 
   constructor(
     public projectQuery: ProjectQuery,
@@ -23,6 +26,8 @@ export class BoardFilterComponent implements OnInit {
     public filterService: FilterService
   ) {
     this.userIds = [];
+    this.numberSelected = 0;
+    this.isQuickFilter = false;
   }
 
   ngOnInit(): void {
@@ -32,9 +37,17 @@ export class BoardFilterComponent implements OnInit {
         this.filterService.updateSearchTerm(term);
       });
 
-    this.filterQuery.userIds$.pipe(untilDestroyed(this)).subscribe((userIds) => {
-      this.userIds = userIds;
-    });
+    this.filterQuery.userIds$
+      .pipe(untilDestroyed(this))
+      .subscribe((userIds) => {
+        this.userIds = userIds;
+      });
+
+    this.filterQuery.filters$
+      .pipe(untilDestroyed(this))
+      .subscribe((filters) => {
+        this.numberSelected = _.filter(filters, (one) => one).length;
+      });
   }
 
   isUserSelected(user: JUser) {
@@ -51,6 +64,22 @@ export class BoardFilterComponent implements OnInit {
 
   userChanged(user: JUser) {
     this.filterService.toggleUserId(user.id);
+  }
+
+  toggleQuickFilterChanged() {
+    this.isQuickFilter = !this.isQuickFilter;
+  }
+
+  priorityChanged() {
+    this.filterService.togglePriority();
+  }
+
+  notPriorityChanged() {
+    this.filterService.toggleNotPriority();
+  }
+
+  backLogOnlyChanged() {
+    this.filterService.toggleBackLogOnly();
   }
 
   resetAll() {

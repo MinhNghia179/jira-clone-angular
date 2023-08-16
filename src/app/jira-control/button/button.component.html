@@ -1,17 +1,33 @@
-<button [type]="type"
-        [ngClass]="['btn', className, isActive ? 'is-active': '', content?.innerHTML?.trim() ? '': 'icon-only']"
-        [disabled]="disabled">
-    <svg-icon *ngIf="!isWorking && icon"
-              [name]="icon"
-              [size]="iconSize">
+<button
+    [type]="type"
+    [ngClass]="['btn', className, isActive ? 'is-active': '', content?.innerHTML?.trim() ? '': 'icon-only']"
+    [disabled]="disabled"
+>
+    <svg-icon
+        *ngIf="!isWorking && icon"
+        [name]="icon"
+        [size]="iconSize"
+    >
     </svg-icon>
-    <svg-icon *ngIf="isWorking"
-              name="spin"
-              class="spinner"
-              [size]="iconSize">
+    <svg-icon
+        *ngIf="isWorking"
+        name="spin"
+        class="spinner"
+        [size]="iconSize"
+    >
     </svg-icon>
-    <span #content
-          [class.with-padding]="isWorking || icon">
+    <span
+        #content
+        [class.with-padding]="isWorking || icon"
+        class="leading-normal"
+    >
         <ng-content></ng-content>
     </span>
+    <svg-icon
+        *ngIf="!isWorking && rightIcon"
+        [name]="rightIcon"
+        [size]="iconSize"
+        class="ml-1"
+    >
+    </svg-icon>
 </button>

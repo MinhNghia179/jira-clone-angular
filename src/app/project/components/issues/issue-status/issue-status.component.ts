@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IssueStatus, IssueStatusDisplay, JIssue } from '@trungk18/interface/issue';
+import {
+  IssueStatus,
+  IssueStatusDisplay,
+  JIssue
+} from '@trungk18/interface/issue';
 import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 
@@ -17,19 +21,24 @@ export class IssueStatusComponent implements OnInit {
     [IssueStatus.BACKLOG]: 'btn-secondary',
     [IssueStatus.SELECTED]: 'btn-secondary',
     [IssueStatus.IN_PROGRESS]: 'btn-primary',
-    [IssueStatus.DONE]: 'btn-success'
+    [IssueStatus.DONE]: 'btn-success',
+    [IssueStatus.CLOSE]: 'btn-secondary'
   };
 
   issueStatuses: IssueStatusValueTitle[];
 
-  constructor(private _projectService: ProjectService, private _projectQuery: ProjectQuery) {}
+  constructor(
+    private _projectService: ProjectService,
+    private _projectQuery: ProjectQuery
+  ) {}
 
   ngOnInit(): void {
     this.issueStatuses = [
       new IssueStatusValueTitle(IssueStatus.BACKLOG),
       new IssueStatusValueTitle(IssueStatus.SELECTED),
       new IssueStatusValueTitle(IssueStatus.IN_PROGRESS),
-      new IssueStatusValueTitle(IssueStatus.DONE)
+      new IssueStatusValueTitle(IssueStatus.DONE),
+      new IssueStatusValueTitle(IssueStatus.CLOSE)
     ];
   }
 

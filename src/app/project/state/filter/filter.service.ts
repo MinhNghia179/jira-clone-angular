@@ -46,6 +46,36 @@ export class FilterService {
     });
   }
 
+  togglePriority() {
+    this.store.update((state) => {
+      const priority = !state.priority;
+      return {
+        ...state,
+        priority
+      };
+    });
+  }
+
+  toggleNotPriority() {
+    this.store.update((state) => {
+      const notPriority = !state.notPriority;
+      return {
+        ...state,
+        notPriority
+      };
+    });
+  }
+
+  toggleBackLogOnly() {
+    this.store.update((state) => {
+      const backLogOnly = !state.backLogOnly;
+      return {
+        ...state,
+        backLogOnly
+      };
+    });
+  }
+
   resetAll() {
     this.store.update((state) => ({
       ...state,

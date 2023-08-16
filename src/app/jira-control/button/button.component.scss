@@ -15,6 +15,10 @@ $jira-bg: rgb(222, 235, 255);
     .with-padding {
       padding: 0;
     }
+
+    .with-margin {
+      margin: 0;
+    }
   }
 
   &.disabled {
@@ -109,6 +113,17 @@ $jira-bg: rgb(222, 235, 255);
   @apply pl-2;
 }
 
+.with-margin {
+  @apply m-1;
+}
+
 .is-active {
-  @apply text-textLink bg-backgroundLightPrimary;
+  @apply text-textLink bg-backgroundDarkPrimary;
+  color: white;
+
+  &:not(:disabled) {
+    &:hover {
+      @apply bg-backgroundDarkPrimary;
+    }
+  }
 }

@@ -1,39 +1,85 @@
-<div class="mt-6 mb-1 uppercase text-textMedium text-13 font-bold">
-    Assignees
-</div>
+<div class="mt-6 mb-1 uppercase text-textMedium text-13 font-bold">Assignees</div>
 
-<j-button *ngFor="let assignee of assignees"
-          [className]="'btn-secondary mr-1-5 mb-2'">
+<j-button
+    *ngFor="let assignee of assignees"
+    [className]="'btn-secondary mr-1-5 mb-2'"
+>
     <div class="flex items-center">
         <j-user [user]="assignee"></j-user>
-        <svg-icon (click)="removeUser(assignee.id)"
-                  title="Remove user"
-                  [size]="20"
-                  [name]="'times'"
-                  class="text-textLight">
+        <svg-icon
+            (click)="removeUser(assignee.id)"
+            title="Remove user"
+            [size]="20"
+            [name]="'times'"
+            class="text-textLight"
+        >
         </svg-icon>
     </div>
 </j-button>
 
-<a class="add-more"
-   nz-dropdown
-   [nzTrigger]="'click'"
-   [nzDropdownMenu]="menu">
-    <i class="mr-1"
-       nz-icon
-       nzType="plus"
-       nzTheme="outline"></i>
+<a
+    class="add-more"
+    nz-dropdown
+    [nzTrigger]="'click'"
+    [nzDropdownMenu]="menu"
+    (nzVisibleChange)="resetForm()"
+>
+    <i
+        class="mr-1"
+        nz-icon
+        nzType="plus"
+        nzTheme="outline"
+    ></i>
     Add Assignee
 </a>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
-    <ul class="mt-3"
+    <ul
+        class="mt-3"
         nz-menu
-        nzNoAnimation>
+        nzNoAnimation
+    >
+        <form class="p-2">
+            <j-input
+                aria-label="search"
+                placeholder="Search"
+                [enableClearButton]="true"
+                [control]="searchControl"
+            ></j-input>
+        </form>
+        <div
+            nz-menu-item
+            (click)="unassignedUser()"
+            class="flex items-center"
+            *ngIf="assignees.length"
+        >
+
+            <nz-avatar
+                class="flex text-center p-1 bg-borderLightest rounded-full"
+                nzIcon="user"
+            ></nz-avatar>
+            <span class="ml-1-5 mr-1-5 user-name font-medium">Unassigned</span>
+        </div>
+        <div *ngIf="assignees.length !== users.length">
+            <div
+                nz-menu-item
+                (click)="autoSelectUser()"
+                class="flex items-center"
+            >
+                <nz-avatar
+                    class="flex text-center p-1 bg-borderLightest rounded-full"
+                    nzIcon="user"
+                ></nz-avatar>
+                <span class="ml-1-5 mr-1-5 user-name font-medium">Automatic</span>
+            </div>
+            <div class="divider"></div>
+        </div>
         <ng-container *ngFor="let option of users">
-            <li nz-menu-item
-                *ngIf="!isUserSelected(option)"
-                (click)="addUserToIssue(option)">
+            <li
+                nz-menu-item
+                *ngIf="!isUserSelected(option) && checkFilterAssignees(option.name)"
+                (click)="addUserToIssue(option)"
+            >
                 <j-user [user]="option"></j-user>
             </li>
         </ng-container>

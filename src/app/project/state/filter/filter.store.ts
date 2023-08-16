@@ -6,6 +6,9 @@ export interface FilterState {
   userIds: string[];
   onlyMyIssue: boolean;
   ignoreResolved: boolean;
+  priority: boolean;
+  notPriority: boolean;
+  backLogOnly: boolean;
 }
 
 export function createInitialFilterState(): FilterState {
@@ -13,7 +16,10 @@ export function createInitialFilterState(): FilterState {
     searchTerm: '',
     userIds: [],
     onlyMyIssue: false,
-    ignoreResolved: false
+    ignoreResolved: false,
+    priority: false,
+    notPriority: false,
+    backLogOnly: false
   };
 }
 
