@@ -6,14 +6,25 @@ export enum IssueType {
   TASK = 'Task',
   BUG = 'Bug'
 }
-
 export enum IssueStatus {
   BACKLOG = 'Backlog',
+
   SELECTED = 'Selected',
   // eslint-disable-next-line @typescript-eslint/naming-convention
   IN_PROGRESS = 'InProgress',
   DONE = 'Done',
   CLOSE = 'Close'
+}
+
+export enum IssueDateReminderType {
+  AT_TIME_OF_DUE_DATE = 'AtTimeOfDueDate',
+  FIVE_MINUTES = 'FiveMinutes',
+  TEN_MINUTES = 'TenMinutes',
+  FIFTEEN_MINUTES = 'FifteenMinutes',
+  ONE_HOUR = 'OneHour',
+  TWO_HOURS = 'TwoHours',
+  ONE_DAY = 'OneDay',
+  TWO_DAYS = 'TwoDays'
 }
 
 export const IssueStatusDisplay = {
@@ -24,6 +35,27 @@ export const IssueStatusDisplay = {
   [IssueStatus.CLOSE]: 'Close'
 };
 
+export const IssueDateReminderTypeDisplay = {
+  [IssueDateReminderType.AT_TIME_OF_DUE_DATE]: 'At time of due date',
+  [IssueDateReminderType.FIVE_MINUTES]: '5 minutes before',
+  [IssueDateReminderType.TEN_MINUTES]: '10 minutes before',
+  [IssueDateReminderType.FIFTEEN_MINUTES]: '15 minutes before',
+  [IssueDateReminderType.ONE_HOUR]: '1 hour before',
+  [IssueDateReminderType.TWO_HOURS]: '2 hour before',
+  [IssueDateReminderType.ONE_DAY]: '1 day before',
+  [IssueDateReminderType.TWO_DAYS]: '2 day before'
+};
+
+export const IssueDateReminderTypeValues = {
+  [IssueDateReminderType.AT_TIME_OF_DUE_DATE]: 0,
+  [IssueDateReminderType.FIVE_MINUTES]: 5,
+  [IssueDateReminderType.TEN_MINUTES]: 10,
+  [IssueDateReminderType.FIFTEEN_MINUTES]: 15,
+  [IssueDateReminderType.ONE_HOUR]: 60,
+  [IssueDateReminderType.TWO_HOURS]: 60 * 2,
+  [IssueDateReminderType.ONE_DAY]: 24 * 60,
+  [IssueDateReminderType.TWO_DAYS]: 24 * 2 * 60
+};
 export enum IssuePriority {
   LOWEST = 'Lowest',
   LOW = 'Low',
@@ -39,6 +71,7 @@ export const IssuePriorityColors = {
   [IssuePriority.LOW]: '#2D8738',
   [IssuePriority.LOWEST]: '#57A55A'
 };
+
 export interface JIssue {
   id: string;
   title: string;
@@ -58,5 +91,7 @@ export interface JIssue {
   projectId: string;
   originalEstimate: number;
   label: string;
+  startTime: string;
+  endTime: string;
 }
 /* eslint-enable no-shadow */

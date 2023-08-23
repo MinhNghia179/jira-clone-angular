@@ -64,7 +64,8 @@
             "styles": [
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.snow.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": [
               "./node_modules/quill/dist/quill.min.js"
@@ -138,7 +139,8 @@
             "styles": [
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.snow.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": [
               "./node_modules/quill/dist/quill.min.js"

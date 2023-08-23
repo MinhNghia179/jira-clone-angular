@@ -1,0 +1,87 @@
+<div class="flex flex-col space-y-4">
+    <div class="text-center text-textMedium font-bold mt-4">Dates</div>
+    <form
+        class="issue-form p-3"
+        [formGroup]="datePickerForm"
+    >
+        <div class="flex justify-center items-center">
+            <nz-date-picker
+                nzInline
+                [(ngModel)]="date"
+                [ngModelOptions]="{standalone: true}"
+                (ngModelChange)="onChange($event)"
+            ></nz-date-picker>
+        </div>
+        <div class="flex flex-col space-y-1 mt-2">
+            <div class="text-14 font-medium">Start date</div>
+            <div class="flex items-center space-x-2">
+                <label
+                    nz-checkbox
+                    formControlName="checkedStartDate"
+                >
+                </label>
+                <input
+                    class="form-input"
+                    placeholder="M/D/YYYY"
+                    jAutofocus
+                    formControlName="startDate"
+                >
+            </div>
+            <div class="text-14 font-medium">Due date</div>
+            <div class="flex items-center space-x-2">
+                <label
+                    nz-checkbox
+                    formControlName="checkedEndDate"
+                >
+                </label>
+                <input
+                    class="form-input"
+                    placeholder="M/D/YYYY"
+                    jAutofocus
+                    formControlName="endDate"
+                >
+                <input
+                    class="form-input"
+                    placeholder="h:mm A"
+                    jAutofocus
+                    formControlName="endDateTime"
+                >
+            </div>
+            <div class="text-14 font-medium">Set due date reminder</div>
+            <div class="text-14 font-medium">
+                Reminders will be sent to all members and watchers of this card.
+            </div>
+
+            <nz-select
+                class="w-full"
+                formControlName="dateReminder"
+                nzNoAnimation
+                nzAllowClear
+                nzPlaceHolder="Choose reminder"
+            >
+                <nz-option
+                    *ngFor="let option of optionReminders"
+                    [nzValue]="option.value"
+                    [nzLabel]="option.label"
+                >
+                </nz-option>
+            </nz-select>
+        </div>
+        <div class="flex w-full flex-col items-center space-y-2 mt-4">
+            <j-button
+                class="w-full"
+                (click)="onSave()"
+                className='btn-primary w-full'
+            >
+                Save
+            </j-button>
+            <j-button
+                class="w-full"
+                className='btn-secondary w-full'
+                (click)="closeModal()"
+            >
+                Remove
+            </j-button>
+        </div>
+    </form>
+</div>

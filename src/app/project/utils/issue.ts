@@ -1,4 +1,10 @@
-import { IssuePriority, IssueType } from '@trungk18/interface/issue';
+import {
+  IssueDateReminderType,
+  IssueDateReminderTypeDisplay,
+  IssueDateReminderTypeValues,
+  IssuePriority,
+  IssueType
+} from '@trungk18/interface/issue';
 import { IssuePriorityIcon } from '@trungk18/interface/issue-priority-icon';
 
 export class IssueUtil {
@@ -18,5 +24,13 @@ export class IssueUtil {
     str = str ?? '';
     searchString = searchString ?? '';
     return str.trim().toLowerCase().includes(searchString.trim().toLowerCase());
+  }
+
+  static getIssueReminderLabel(issueReminderType: IssueDateReminderType) {
+    return IssueDateReminderTypeDisplay[issueReminderType];
+  }
+
+  static getIssueReminderValue(issueReminderType: IssueDateReminderType) {
+    return IssueDateReminderTypeValues[issueReminderType];
   }
 }

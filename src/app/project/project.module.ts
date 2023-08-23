@@ -35,6 +35,10 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
 import { IssueOriginalEstimateComponent } from './components/issues/issue-original-estimate/issue-original-estimate.component';
+import { IssueDatesComponent } from './components/issues/issue-dates/issue-dates.component';
+import { IssueDatePickerComponent } from './components/issue-date-picker/issue-date-picker.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,9 @@ import { IssueOriginalEstimateComponent } from './components/issues/issue-origin
     IssueReporterSelectComponent,
     IssueAssigneesSelectComponent,
     ResizerComponent,
-    IssueOriginalEstimateComponent
+    IssueOriginalEstimateComponent,
+    IssueDatesComponent,
+    IssueDatePickerComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +81,9 @@ import { IssueOriginalEstimateComponent } from './components/issues/issue-origin
     ReactiveFormsModule,
     JiraControlModule,
     ContentLoaderModule,
-    QuillModule
+    QuillModule,
+    NzDatePickerModule,
+    NzCheckboxModule
   ]
 })
 export class ProjectModule {}

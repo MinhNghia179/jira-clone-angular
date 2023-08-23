@@ -27,12 +27,15 @@ export class IssueOriginalEstimateComponent implements OnChanges {
   }
 
   formatEstimateTime() {
-    this.setTimeEdit(false);
     const value = this.timeControl.value;
+    const now = new Date();
+    const startTime = now.toISOString();
     this._projectService.updateIssue({
       ...this.issue,
-      originalEstimate: value
+      originalEstimate: value,
+      startTime
     });
+    this.setTimeEdit(false);
   }
 
   cancelEditTime() {

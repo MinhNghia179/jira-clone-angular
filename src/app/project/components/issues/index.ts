@@ -14,6 +14,8 @@ import { IssueCommentComponent } from './issue-comment/issue-comment.component';
 import { IssueDeleteModalComponent } from './issue-delete-modal/issue-delete-modal.component';
 import { IssueOriginalEstimateComponent } from './issue-original-estimate/issue-original-estimate.component';
 import { IssueMoreActionComponent } from './issue-more-action/issue-more-action.component';
+import { IssueDatesComponent } from './issue-dates/issue-dates.component';
+import { IssueDatePickerComponent } from '../issue-date-picker/issue-date-picker.component';
 
 export const IssueUtilComponents = [
   IssueCardComponent,
@@ -31,5 +33,7 @@ export const IssueUtilComponents = [
   IssueCommentComponent,
   IssueDeleteModalComponent,
   IssueOriginalEstimateComponent,
-  IssueMoreActionComponent
+  IssueMoreActionComponent,
+  IssueDatesComponent,
+  IssueDatePickerComponent
 ];

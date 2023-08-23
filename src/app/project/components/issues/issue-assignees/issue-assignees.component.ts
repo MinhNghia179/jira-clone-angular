@@ -26,6 +26,10 @@ export class IssueAssigneesComponent implements OnInit, OnChanges {
 
   constructor(private _projectService: ProjectService) {}
 
+  get searchAssignee() {
+    return this.searchControl.value;
+  }
+
   ngOnInit(): void {
     this.assignees = this.issue.userIds.map((userId) =>
       this.users.find((x) => x.id === userId)
@@ -88,7 +92,7 @@ export class IssueAssigneesComponent implements OnInit, OnChanges {
   }
 
   checkFilterAssignees(userName: string) {
-    return IssueUtil.searchString(userName, this.searchControl.value);
+    return IssueUtil.searchString(userName, this.searchAssignee);
   }
 
   resetForm() {

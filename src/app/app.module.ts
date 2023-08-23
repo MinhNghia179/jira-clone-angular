@@ -14,6 +14,11 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { QuillModule } from 'ngx-quill';
 import * as Sentry from '@sentry/angular';
 import { Router } from '@angular/router';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,14 +45,18 @@ import { Router } from '@angular/router';
     },
     {
       provide: Sentry.TraceService,
-      deps: [Router],
+      deps: [Router]
     },
     {
       provide: APP_INITIALIZER,
       useFactory: () => () => {},
       deps: [Sentry.TraceService],
-      multi: true,
+      multi: true
     },
+    {
+      provide: NZ_I18N,
+      useValue: en_US
+    }
   ],
   bootstrap: [AppComponent]
 })

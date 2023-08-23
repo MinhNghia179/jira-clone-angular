@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "paths": {      
+    "paths": {
       "@trungk18/*": ["src/app/*"],
       "@trungk18/interface/*": ["src/app/interface/*"]
     },

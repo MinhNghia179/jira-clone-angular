@@ -1,13 +1,22 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { IssuePriority, IssueStatus, IssueStatusDisplay, JIssue } from '@trungk18/interface/issue';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {
+  IssuePriority,
+  IssueStatus,
+  IssueStatusDisplay,
+  JIssue
+} from '@trungk18/interface/issue';
+import { FilterQuery } from '@trungk18/project/state/filter/filter.query';
 import { FilterState } from '@trungk18/project/state/filter/filter.store';
 import { ProjectService } from '@trungk18/project/state/project/project.service';
-import { Observable, combineLatest } from 'rxjs';
-import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
-import { FilterQuery } from '@trungk18/project/state/filter/filter.query';
-import * as dateFns from 'date-fns';
 import { IssueUtil } from '@trungk18/project/utils/issue';
+import * as dateFns from 'date-fns';
+import { Observable, combineLatest } from 'rxjs';
 
 @Component({
   selector: '[board-dnd-list]',
@@ -29,7 +38,10 @@ export class BoardDndListComponent implements OnInit {
     return this.issues.length;
   }
 
-  constructor(private _projectService: ProjectService, private _filterQuery: FilterQuery) {}
+  constructor(
+    private _projectService: ProjectService,
+    private _filterQuery: FilterQuery
+  ) {}
 
   ngOnInit(): void {
     combineLatest([this.issues$, this._filterQuery.all$])
@@ -59,30 +71,46 @@ export class BoardDndListComponent implements OnInit {
   }
 
   filterIssues(issues: JIssue[], filter: FilterState): JIssue[] {
-    const { onlyMyIssue, ignoreResolved, searchTerm, userIds, backLogOnly, priority, notPriority } = filter;
+    const {
+      onlyMyIssue,
+      ignoreResolved,
+      searchTerm,
+      userIds,
+      backLogOnly,
+      priority,
+      notPriority
+    } = filter;
     return issues.filter((issue) => {
-      const isMatchTerm = searchTerm ? IssueUtil.searchString(issue.title, searchTerm) : true;
+      const isMatchTerm = searchTerm
+        ? IssueUtil.searchString(issue.title, searchTerm)
+        : true;
       const isIncludeUsers = userIds.length
         ? issue.userIds.some((userId) => userIds.includes(userId))
         : true;
       const isMyIssue = onlyMyIssue
         ? this.currentUserId && issue.userIds.includes(this.currentUserId)
         : true;
-      const isBackLogOnly = backLogOnly ? issue.status === IssueStatus.BACKLOG : true
+      const isBackLogOnly = backLogOnly
+        ? issue.status === IssueStatus.BACKLOG
+        : true;
       const isPriority = priority
         ? [IssuePriority.HIGHEST, IssuePriority.HIGH].includes(issue.priority)
         : true;
       const isNotPriority = notPriority
         ? ![IssuePriority.HIGHEST, IssuePriority.HIGH].includes(issue.priority)
         : true;
-      const isIgnoreResolved = ignoreResolved ? issue.status !== IssueStatus.DONE : true;
+      const isIgnoreResolved = ignoreResolved
+        ? issue.status !== IssueStatus.DONE
+        : true;
 
       return (
         isMatchTerm &&
         isIncludeUsers &&
         isMyIssue &&
         isIgnoreResolved &&
-        isBackLogOnly && isPriority && isNotPriority
+        isBackLogOnly &&
+        isPriority &&
+        isNotPriority
       );
     });
   }

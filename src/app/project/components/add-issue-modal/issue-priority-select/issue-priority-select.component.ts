@@ -14,7 +14,9 @@ export class IssuePrioritySelectComponent {
   @Input() control: FormControl;
   priorities: IssuePriorityIcon[];
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.priorities = ProjectConst.PrioritiesWithIcon;
   }
 

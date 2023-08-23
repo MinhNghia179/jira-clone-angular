@@ -12,7 +12,7 @@ export class InputComponent implements OnInit {
   @Input() icon: string;
   @Input() iconSize = 16;
   @Input() placeholder = '';
-  @Input() enableClearButton: boolean;
+  @Input() enableClearButton: boolean = true;
 
   get iconContainerWidth(): number {
     return this.iconSize * 2;
