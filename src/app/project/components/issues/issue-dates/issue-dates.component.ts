@@ -23,8 +23,8 @@ export class IssueDatesComponent implements OnInit {
   openDatesModal(issueId: string) {
     this._modalService.create({
       nzContent: IssueDatePickerComponent,
-      nzWidth: 380,
-      nzClosable: false,
+      nzWidth: 500,
+      nzClosable: true,
       nzFooter: null,
       nzComponentParams: {
         issue$: this._projectQuery.issueById$(issueId)

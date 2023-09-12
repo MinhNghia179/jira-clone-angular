@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { IssueDateReminderType, JIssue } from '@trungk18/interface/issue';
 import { IssueTypeReminder } from '@trungk18/interface/issue-type-reminder';
 import { ProjectService } from '@trungk18/project/state/project/project.service';
+import { endOfMonth, format } from 'date-fns';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Observable } from 'rxjs';
 
@@ -15,7 +16,8 @@ export class IssueDatePickerComponent implements OnInit {
   @Input() issue$: Observable<JIssue>;
 
   datePickerForm: FormGroup;
-  date: null;
+  date: Date;
+  ranges: any;
 
   optionReminders: IssueTypeReminder[] = [];
 
@@ -27,6 +29,7 @@ export class IssueDatePickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    const now = new Date();
     this.optionReminders = [
       new IssueTypeReminder(IssueDateReminderType.AT_TIME_OF_DUE_DATE),
       new IssueTypeReminder(IssueDateReminderType.FIVE_MINUTES),
@@ -37,12 +40,14 @@ export class IssueDatePickerComponent implements OnInit {
       new IssueTypeReminder(IssueDateReminderType.ONE_DAY),
       new IssueTypeReminder(IssueDateReminderType.TWO_DAYS)
     ];
+    this.ranges = {
+      'To day': [now, now],
+      'This month': [now, endOfMonth(now)]
+    };
   }
 
   initForm() {
     this.datePickerForm = this._fb.group({
-      checkedStartDate: [false],
-      checkedEndDate: [true],
       startDate: [''],
       endDate: [''],
       endDateTime: [''],
@@ -50,7 +55,12 @@ export class IssueDatePickerComponent implements OnInit {
     });
   }
 
-  onChange(event: any) {}
+  onChange(event: any) {
+    this.datePickerForm.patchValue({
+      startDate: format(event[0], 'yyyy-MM-dd'),
+      endDate: format(event[1], 'yyyy-MM-dd')
+    });
+  }
 
   closeModal() {
     this._modalRef.close();

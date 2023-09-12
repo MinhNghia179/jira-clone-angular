@@ -5,46 +5,32 @@
         [formGroup]="datePickerForm"
     >
         <div class="flex justify-center items-center">
-            <nz-date-picker
+            <nz-range-picker
                 nzInline
+                nzShowTime
+                [nzRanges]="ranges"
                 [(ngModel)]="date"
                 [ngModelOptions]="{standalone: true}"
                 (ngModelChange)="onChange($event)"
-            ></nz-date-picker>
+            ></nz-range-picker>
         </div>
         <div class="flex flex-col space-y-1 mt-2">
             <div class="text-14 font-medium">Start date</div>
             <div class="flex items-center space-x-2">
-                <label
-                    nz-checkbox
-                    formControlName="checkedStartDate"
-                >
-                </label>
                 <input
                     class="form-input"
-                    placeholder="M/D/YYYY"
+                    type="date"
                     jAutofocus
                     formControlName="startDate"
                 >
             </div>
             <div class="text-14 font-medium">Due date</div>
             <div class="flex items-center space-x-2">
-                <label
-                    nz-checkbox
-                    formControlName="checkedEndDate"
-                >
-                </label>
                 <input
                     class="form-input"
-                    placeholder="M/D/YYYY"
+                    type="date"
                     jAutofocus
                     formControlName="endDate"
-                >
-                <input
-                    class="form-input"
-                    placeholder="h:mm A"
-                    jAutofocus
-                    formControlName="endDateTime"
                 >
             </div>
             <div class="text-14 font-medium">Set due date reminder</div>
