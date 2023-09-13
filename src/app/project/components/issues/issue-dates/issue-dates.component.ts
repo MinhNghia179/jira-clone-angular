@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { JIssue } from '@trungk18/interface/issue';
-import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { IssueDatePickerComponent } from '../../issue-date-picker/issue-date-picker.component';
 
@@ -13,10 +12,7 @@ export class IssueDatesComponent implements OnInit {
   @Input() issue: JIssue;
   @Output() onClosed = new EventEmitter();
 
-  constructor(
-    private _modalService: NzModalService,
-    private _projectQuery: ProjectQuery
-  ) {}
+  constructor(private _modalService: NzModalService) {}
 
   ngOnInit(): void {}
 
@@ -27,7 +23,7 @@ export class IssueDatesComponent implements OnInit {
       nzClosable: true,
       nzFooter: null,
       nzComponentParams: {
-        issue$: this._projectQuery.issueById$(issueId)
+        issue: this.issue
       }
     });
   }

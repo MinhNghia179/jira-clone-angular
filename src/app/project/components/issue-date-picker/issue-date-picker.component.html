@@ -2,42 +2,21 @@
     <div class="text-center text-textMedium font-bold mt-4">Dates</div>
     <form
         class="issue-form p-3"
-        [formGroup]="datePickerForm"
+        [formGroup]="form"
     >
-        <div class="flex justify-center items-center">
+        <div class="text-14 font-medium">Start Date - Due Date</div>
+        <div class="flex items-center">
             <nz-range-picker
-                nzInline
                 nzShowTime
                 [nzRanges]="ranges"
-                [(ngModel)]="date"
-                [ngModelOptions]="{standalone: true}"
-                (ngModelChange)="onChange($event)"
+                formControlName="datePicker"
+                nzFormat="yyyy-MM-dd HH:mm:ss"
             ></nz-range-picker>
         </div>
         <div class="flex flex-col space-y-1 mt-2">
-            <div class="text-14 font-medium">Start date</div>
-            <div class="flex items-center space-x-2">
-                <input
-                    class="form-input"
-                    type="date"
-                    jAutofocus
-                    formControlName="startDate"
-                >
-            </div>
-            <div class="text-14 font-medium">Due date</div>
-            <div class="flex items-center space-x-2">
-                <input
-                    class="form-input"
-                    type="date"
-                    jAutofocus
-                    formControlName="endDate"
-                >
-            </div>
-            <div class="text-14 font-medium">Set due date reminder</div>
             <div class="text-14 font-medium">
-                Reminders will be sent to all members and watchers of this card.
+                Set due date reminder(Reminders will be sent to all members and watchers of this card).
             </div>
-
             <nz-select
                 class="w-full"
                 formControlName="dateReminder"
@@ -47,7 +26,7 @@
             >
                 <nz-option
                     *ngFor="let option of optionReminders"
-                    [nzValue]="option.value"
+                    [nzValue]="option.key"
                     [nzLabel]="option.label"
                 >
                 </nz-option>
@@ -57,6 +36,7 @@
             <j-button
                 class="w-full"
                 (click)="onSave()"
+                [disabled]="form?.invalid"
                 className='btn-primary w-full'
             >
                 Save

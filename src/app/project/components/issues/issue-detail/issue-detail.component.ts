@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { JIssue } from '@trungk18/interface/issue';
 import { DeleteIssueModel } from '@trungk18/interface/ui-model/delete-issue-model';
 import { ProjectQuery } from '@trungk18/project/state/project/project.query';
@@ -22,6 +28,10 @@ export class IssueDetailComponent {
     public projectQuery: ProjectQuery,
     private _modalService: NzModalService
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Data', this.issue);
+  }
 
   openDeleteIssueModal() {
     this._modalService.create({

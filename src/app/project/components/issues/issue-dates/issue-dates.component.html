@@ -2,7 +2,17 @@
 
 <j-button
     className="btn-secondary"
+    *ngIf="issue.startDate && issue.endDate; else noDatePicker"
     (click)="openDatesModal(issue.id)"
 >
-    Sep 4 - Sep 5 at 12:34 PM
+    {{ issue.startDate | date: "mediumDate" }} - {{ issue.endDate | date: "medium" }}
 </j-button>
+
+<ng-template #noDatePicker>
+    <j-button
+        className="btn-secondary"
+        (click)="openDatesModal(issue.id)"
+    >
+        None
+    </j-button>
+</ng-template>

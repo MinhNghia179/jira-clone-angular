@@ -32,8 +32,7 @@ export class IssueOriginalEstimateComponent implements OnChanges {
     const startTime = now.toISOString();
     this._projectService.updateIssue({
       ...this.issue,
-      originalEstimate: value,
-      startTime
+      originalEstimate: value
     });
     this.setTimeEdit(false);
   }

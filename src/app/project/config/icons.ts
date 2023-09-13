@@ -12,7 +12,9 @@ import {
   CheckOutline,
   TagOutline,
   DiffOutline,
-  LinkOutline
+  LinkOutline,
+  ForwardOutline,
+  DoubleRightOutline
 } from '@ant-design/icons-angular/icons';
 
 export const NZ_JIRA_ICONS: IconDefinition[] = [
@@ -28,5 +30,7 @@ export const NZ_JIRA_ICONS: IconDefinition[] = [
   CheckOutline,
   TagOutline,
   DiffOutline,
-  LinkOutline
+  LinkOutline,
+  ForwardOutline,
+  DoubleRightOutline
 ];

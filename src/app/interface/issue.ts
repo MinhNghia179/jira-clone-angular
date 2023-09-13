@@ -91,7 +91,8 @@ export interface JIssue {
   projectId: string;
   originalEstimate: number;
   label: string;
-  startTime: string;
-  endTime: string;
+  startDate: Date | string;
+  endDate: Date | string;
+  dateReminder: IssueDateReminderType;
 }
 /* eslint-enable no-shadow */
